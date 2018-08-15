@@ -72,12 +72,18 @@ class Grads:
         return np.array(data).reshape(nz, self.ny, self.nx,)
     
     # def plot(self, name: str, levle: int =0):
-    def plot(self, name, levle = 0):    
+    def plot(self, name, level = 0, lat=[], lon=[]):    
+        import matplotlib
+        matplotlib.use('agg')
         import matplotlib.pyplot as plt  
-        t = self.get("T")
-        plt.contourf( t[levle,:,:], )
+        var = self.get(name)
+        if len(lat) !=0 :
+            plt.contourf(lon, lat, var[level,:,:], levels = range(0,30,3))
+        else:
+            plt.contourf( var[level,:,:], )
+        plt.grid()
         plt.colorbar()
-        plt.show()    
+        plt.savefig(name+".png")    
 
 
 if __name__ == "__main__":

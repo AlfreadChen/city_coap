@@ -54,9 +54,8 @@ def getChem(chemModl, chemType, nowTime, forTime, chemName, outName, citys, grid
     wrfTime = (nowTime - timedelta(hours=4) ).strftime("%Y%m%d%H")
     begTime = (nowTime - timedelta(hours=3) ).strftime("%Y%m%d%H")
     chemMeta = chemMeta.format(wrfTime=wrfTime, begTime=begTime)
-    timeLst = (forTime+timedelta(hours=i) for i in range(24))
+    timeLst = (forTime+timedelta(hours=i-8) for i in range(24))
     chemLst = [chemName.format(wrfTime=wrfTime, begTime=begTime, simTime=itime.strftime("%Y%m%d%H")) for itime in timeLst]  
-    print(chemLst)
     if not all( os.path.exists(file) for file in chemLst ):
         return True   
         
