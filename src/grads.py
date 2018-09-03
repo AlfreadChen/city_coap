@@ -20,7 +20,7 @@ class CtlMeta:
         self.vars = {}
         infoDic = {}
         varsLst = []
-        with open(ctlFile,"r") as file:
+        with open(ctlFile, "r", encoding="utf-8") as file:
             for line in file:
                 line = line.strip()
                 if line[:1].isalpha():
@@ -63,7 +63,16 @@ class Grads:
     #def get(self, name: str): -> numpy.array
     def get(self, name): 
         if not name in self.vars:
-           import pdb; pdb.set_trace()
+           if name == "XLONG":
+               tmp = [i for i in self.vars if "LON" in i]
+               name = tmp[0]
+           elif name == "XLAT":
+               tmp = [i for i in self.vars if "LAT" in i]
+               name = tmp[0]
+           else:
+               print(name, "is a wrong name")
+               exit()
+               import pdb; pdb.set_trace()
         name = name.upper()
         nz = self.vars[name].nz
         beg, end = self.vars[name].rec
@@ -85,11 +94,6 @@ class Grads:
         plt.colorbar()
         plt.savefig(name+".png")    
 
-
 if __name__ == "__main__":
     grd = Grads("naqpd01.2018080616.ctl", "naqpd01.2018081316.grd")
     t = grd.get("T")
-    # import matplotlib.pyplot as plt  
-    # fig, ax = plt.subplots()
-    # ax.contourf( t[0,:,:], )
-    # plt.show()
