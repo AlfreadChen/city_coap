@@ -1,6 +1,7 @@
 #!/bin/bash
-export PATH=/p200/home/model/xiaolh/conda/bin:$PATH
+source ../config/env.sh
+
 #real-time run
 YYMMDD=$(date +%Y%m%d)
-YYMMDD=20180830
+YYMMDD=20180915
 python -W ignore real.py -t $YYMMDD

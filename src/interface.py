@@ -14,8 +14,8 @@ naqpConc = {
     "75-07-0"   : ("ALD2" , 30.0260),# d021 乙醛
     "110-54-3"  : ("PAR"  , 72.1488),# c061 C5H12 烷烃类有机物
     "74-85-1"   : ("ETH"  , 28.0500),# C2H4 乙烯
-    "115-11-7"  : ("OLEI" , 56.1063),# u042 # 双碳键: 间在中间
-    "590-18-1"  : ("OLET" , 56.1063),# u041 # 双碳键，间在两边   
+    "590-18-1"  : ("OLEI" , 56.1063),# u041 # 双碳键: 间在中间
+    "115-11-7"  : ("OLET" , 56.1063),# u042 # 双碳键，间在两边   
     "108-88-3"  : ("TOL"  , 92.1384),# r071 甲苯和其他单烷基芳香烃
     "95-47-6"   : ("XYL"  , 106.165),# r081 二甲苯和其他多烷基芳香烃
     "78-79-5"   : ("ISOP" , 68.1170),# uu51 异戊二烯
@@ -34,8 +34,8 @@ naqpEmis = {
     "108-88-3"  : ("TOL"  , 92.1384), # r071 甲苯和其他单烷基芳香烃
     "95-47-6"   : ("XYL"  , 106.165), # r081 二甲苯和其他多烷基芳香烃
     "78-79-5"   : ("ISOP" , 68.1170), # uu51
-    "590-18-1"  : ("OLET" , 56.1063), # u041
-    "115-11-7"  : ("OLEI" , 56.1063), # u042
+    "590-18-1"  : ("OLEI" , 56.1063), # u041 # 双碳键: 间在中间
+    "115-11-7"  : ("OLET" , 56.1063), # u042 # 双碳键，间在两边  
     "50-00-0"   : ("HCHO" , 30.0260), # CH2O
     "67-56-1"   : ("MEOH" , 32.0420), # o011
     "71-23-8"   : ("ANOL" , 102.180), # o031
@@ -95,8 +95,8 @@ def getNaqp(chemLst, outLst, citys, lat2d, lon2d, metafile, metaDic, factor= Non
         #import pdb; pdb.set_trace()
         for cas in metaDic:
             gird = grd.get(metaDic[cas][0])[0,:,:]
-            #import pdb; pdb.set_trace()
             points = grid2points( lat2d, lon2d, gird, lats, lons )
+            #import pdb; pdb.set_trace() 
             for name in cityNames:
                 if factor:
                     point = points[cityNames.index(name)]*metaDic[cas][1]*factor
@@ -134,6 +134,7 @@ def getCmaq(chemFile, outLst, citys, lat2d, lon2d, metaDic, forTime, factor= Non
                 if factor:
                     area = girdData.attrs["XCELL"]*girdData.attrs["YCELL"]
                     point = points[cityNames.index(name)]*metaDic[cas][1]*factor/area
+                    #import pdb; pdb.set_trace()
                 else:
                     point = points[cityNames.index(name)]*metaDic[cas][1]*44.64 # ppm --> ug/m^3
                 data.setdefault(name,{}).setdefault(cas,[]).append(point)
@@ -142,7 +143,7 @@ def getCmaq(chemFile, outLst, citys, lat2d, lon2d, metaDic, forTime, factor= Non
         writeMeanConc(outName, data[city])
 
 def getCmaqEmis(chemFile, outLst, citys, lat2d, lon2d, forTime):
-    getCmaq(chemFile, outLst, citys, lat2d, lon2d, cmaqEmis, forTime, factor=1000000)
+    getCmaq(chemFile, outLst, citys, lat2d, lon2d, cmaqEmis, forTime, factor=1e6)
 
 def getCmaqConc(chemFile, outLst, citys, lat2d, lon2d, forTime):
     getCmaq(chemFile, outLst, citys, lat2d, lon2d, cmaqConc, forTime)
@@ -162,5 +163,5 @@ def writeMeanConc(fileName, data):
 def grid2points( lat2d, lon2d, gird, lats, lons ):
     from scipy.interpolate import griddata 
     points = np.stack( (lon2d.flatten(), lat2d.flatten()) ,axis=1)
-    pntvalue = griddata(points, gird.flatten(), (lons, lats), method='nearest') # 
+    pntvalue = griddata(points, gird.flatten(), (lons, lats), method='linear') # nearest 
     return pntvalue

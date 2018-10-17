@@ -72,7 +72,7 @@ class Grads:
            else:
                print(name, "is a wrong name")
                exit()
-               import pdb; pdb.set_trace()
+               #import pdb; pdb.set_trace()
         name = name.upper()
         nz = self.vars[name].nz
         beg, end = self.vars[name].rec
@@ -81,7 +81,7 @@ class Grads:
         return np.array(data).reshape(nz, self.ny, self.nx,)
     
     # def plot(self, name: str, levle: int =0):
-    def plot(self, name, level = 0, lat=[], lon=[]):    
+    def plot(self, name, level = 0, lat=[], lon=[], values=None):    
         import matplotlib
         matplotlib.use('agg')
         import matplotlib.pyplot as plt  
@@ -89,7 +89,10 @@ class Grads:
         if len(lat) !=0 :
             plt.contourf(lon, lat, var[level,:,:], levels = range(0,30,3))
         else:
-            plt.contourf( var[level,:,:], )
+            if not values:
+                plt.contourf( var[level,:,:], )
+            else:
+                plt.contourf( var[level,:,:], levels = values)
         plt.grid()
         plt.colorbar()
         plt.savefig(name+".png")    

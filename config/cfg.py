@@ -2,8 +2,8 @@
 chemType = "conc" # emis, conc
 chemModl = "naqp" # naqp, cmaq
 
-#chemName = "/p200/js2/city_cmaq_js2/data/output/emis/D2/EM_D2_{time}.ncf" # 201827312
-#chemName = "/p200/js2/city_cmaq_js2/data/output/cctm/D2/CCTM_CONC_D2_{time}.ncf" # 2018082912
+#chemName = "/p200/js2/city_cmaq_js2/data/output/emis/D2/EM_D2_{time}.ncf"
+#chemName = "/p200/js2/city_cmaq_js2/data/output/cctm/D2/CCTM_CONC_D2_{time}.ncf"
 
 #chemName = "/p200/js2/city_js2/data/output/emis/emis.total.{simTime}.d2"
 #chemMeta = "/p200/js2/city_js2/data/input/em_sample/emis.total.201501.d2.ctl"
@@ -20,12 +20,7 @@ foreDays = 3
 
 # stations of simulation 
 citys = {
-    "nanjing"    :[118.74593, 32.04278],
-    #"shengzhan"  :[118.74583, 32.04278],
-    #"suzhou"     :[120.60, 31.30],
-    #"nantong"    :[120.86, 32.01],
-    #"lianyungang":[119.22, 34.60],
-    #"yangzhou"   :[119.42, 32.39],
-    #"zhenjiang"  :[119.27, 32.12],
-    #"suqian"     :[118.30, 33.96],
+    "beijing"  : [116.19 , 39.55,  0.043, ],
+    "wuhan"    : [114.886, 30.452, 0.110, ],
+    "zhengzhou": [113.605, 37.748, 0.105, ],
 }

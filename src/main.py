@@ -126,7 +126,7 @@ class CmaqInterface(ChemInterface):
             strTime = cmqTime.strftime("%Y%m%d%H")
         chemInputs = self.chemName.format(time=strTime)
         self.chemInputs = None
-        #import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         if os.path.exists(chemInputs):
             self.chemInputs = chemInputs
 
