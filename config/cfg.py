@@ -20,7 +20,7 @@ foreDays = 3
 
 # stations of simulation 
 citys = {
-    "beijing"  : [116.19 , 39.55,  0.043, ],
-    "wuhan"    : [114.886, 30.452, 0.110, ],
-    "zhengzhou": [113.605, 37.748, 0.105, ],
+    "beijing"  : [116.19 , 39.55,  ],
+    "wuhan"    : [114.886, 30.452, ],
+    "zhengzhou": [113.605, 37.748, ],
 }
