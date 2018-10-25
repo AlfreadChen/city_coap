@@ -8,7 +8,7 @@ chemModl = "naqp" # naqp, cmaq
 #chemName = "/p200/js2/city_js2/data/output/emis/emis.total.{simTime}.d2"
 #chemMeta = "/p200/js2/city_js2/data/input/em_sample/emis.total.201501.d2.ctl"
 
-chemName = "/p200/js2/city_js2/data/output/naqpms/{wrfTime}/out/data/{begTime}/testd2.{simTime}.grd"
+#chemName = "/p200/js2/city_js2/data/output/naqpms/{wrfTime}/out/data/{begTime}/testd2.{simTime}.grd"
 chemMeta = "/p200/js2/city_js2/data/output/naqpms/{wrfTime}/out/data/testd2.{begTime}.ctl"
 
 # MetaData
